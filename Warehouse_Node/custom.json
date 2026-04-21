@@ -1,0 +1,35 @@
+{
+  "widgetsBundle": {
+    "alias": "custom",
+    "title": "custom",
+    "image": "",
+    "scada": true,
+    "description": "",
+    "order": null,
+    "name": "custom"
+  },
+  "widgetTypes": [
+    {
+      "fqn": "led",
+      "name": "LED",
+      "deprecated": false,
+      "image": null,
+      "description": null,
+      "descriptor": {
+        "type": "latest",
+        "sizeX": 7.5,
+        "sizeY": 3,
+        "resources": [],
+        "templateHtml": "<div style=\"display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%;\">\r\n  <div id=\"led\" style=\"width:70px; height:70px; border-radius:50%; background:#ff1744; box-shadow:0 0 15px 5px rgba(255,23,68,0.6); transition:all 0.4s;\"></div>\r\n  <div id=\"lbl\" style=\"margin-top:12px; font-size:16px; font-weight:bold; color:#d50000;\">OFF</div>\r\n</div>",
+        "templateCss": "#container {\n    overflow: auto;\n}\n\n.tbDatasource-container {\n    margin: 5px;\n    padding: 8px;\n}\n\n.tbDatasource-title {\n    font-size: 1.200rem;\n    font-weight: 500;\n    padding-bottom: 10px;\n}\n\n.tbDatasource-table {\n    width: 100%;\n    box-shadow: 0 0 10px #ccc;\n    border-collapse: collapse;\n    white-space: nowrap;\n    font-size: 1.000rem;\n    color: #757575;\n}\n\n.tbDatasource-table td {\n    position: relative;\n    border-top: 1px solid rgba(0, 0, 0, 0.12);\n    border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n    padding: 0px 18px;\n    box-sizing: border-box;\n}",
+        "controllerScript": "self.onInit = function() {};\r\n\r\nself.onDataUpdated = function() {\r\n    var data = self.ctx.data;\r\n    if (data && data.length > 0 && data[0].data.length > 0) {\r\n        var val = data[0].data[0][1];\r\n        var isOn = (val === true || val === 'true' || val === 1 || val === '1');\r\n        var led = self.ctx.$container[0].querySelector('#led');\r\n        var lbl = self.ctx.$container[0].querySelector('#lbl');\r\n        if (isOn) {\r\n            led.style.backgroundColor = '#00e676';\r\n            led.style.boxShadow = '0 0 20px 8px rgba(0,230,118,0.7)';\r\n            lbl.textContent = 'ON';\r\n            lbl.style.color = '#00c853';\r\n        } else {\r\n            led.style.backgroundColor = '#ff1744';\r\n            led.style.boxShadow = '0 0 15px 5px rgba(255,23,68,0.6)';\r\n            lbl.textContent = 'OFF';\r\n            lbl.style.color = '#d50000';\r\n        }\r\n    }\r\n};\r\n\r\nself.onResize = function() {};\r\nself.onDestroy = function() {};",
+        "settingsForm": [],
+        "dataKeySettingsForm": [],
+        "defaultConfig": "{\"datasources\":[{\"type\":\"function\",\"name\":\"function\",\"dataKeys\":[{\"name\":\"f(x)\",\"type\":\"function\",\"label\":\"Random\",\"color\":\"#2196f3\",\"settings\":{},\"_hash\":0.15479322438769105,\"funcBody\":\"var value = prevValue + Math.random() * 100 - 50;\\nvar multiplier = Math.pow(10, 2 || 0);\\nvar value = Math.round(value * multiplier) / multiplier;\\nif (value < -1000) {\\n\\tvalue = -1000;\\n} else if (value > 1000) {\\n\\tvalue = 1000;\\n}\\nreturn value;\"}]}],\"showTitle\":true,\"backgroundColor\":\"#fff\",\"color\":\"rgba(0, 0, 0, 0.87)\",\"padding\":\"8px\",\"settings\":{},\"title\":\"LED\",\"decimals\":null}"
+      },
+      "resources": [],
+      "scada": false,
+      "tags": null
+    }
+  ]
+}
