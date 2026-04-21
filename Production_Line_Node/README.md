@@ -27,6 +27,7 @@ This node represents the production line section of the Smart Factory IoT Monito
 - `.h` files – Header files
 - `connections.pzw` – PicsimLab circuit design for Node 1
 - Python file – Supporting integration (utility script)
+- Dashboard JSON file – ThingsBoard dashboard configuration
 
 
 ## Telemetry Parameters
